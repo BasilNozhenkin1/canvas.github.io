@@ -54,6 +54,8 @@ var Controller = {
         coord.x = random(1, settings.width);
         coord.y = random(1, settings.height);
       });*/
+      Model.interactions = { 'rr': 0, 'yy': 0, 'ry': 0, 'yr': 0 };
+
       Model.coordinates.forEach(coord  => {
         var neighbours = Model.coordinates.filter(item => item.x === coord.x+1 && item.y === coord.y+1 ||
                                                  item.x === coord.x+1 && item.y === coord.y ||
@@ -71,6 +73,15 @@ var Controller = {
           (coord.t === 'y' && n.t === 'y') ? Model.interactions.yy++ : null;
         })
       });
+      /*
+      Ограничение на размножение по размеру поля
+      */  
+      if (Model.interactions.rr+Model.interactions.yy+Model.interactions.ry+Model.interactions.yr > 20) {
+          Model.interactions.rr = Math.floor(Model.interactions.rr/5);
+          Model.interactions.yy = Math.floor(Model.interactions.yy/5);
+          Model.interactions.ry = Math.floor(Model.interactions.ry/5);
+          Model.interactions.yr = Math.floor(Model.interactions.yr/5);
+      }
       /*
       Размножение
       */
@@ -90,12 +101,10 @@ var Controller = {
           }
         }
         View.update();
-
       }
-      //window.requestAnimationFrame(handleStep.bind(this));
     },
     handleSteps: function() {
-      setInterval(this.handleStep, 1000);
+      setInterval(this.handleStep, 2000);
     }
 
 

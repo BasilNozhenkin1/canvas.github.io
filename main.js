@@ -3,8 +3,7 @@ var settings = {
 	height: 10,
 	widthSize: 20,
 	heightSize: 20,
-	mainTile: 'Tiles/black.png',
-	fillStyle: 'red'
+	mainTile: 'Tiles/black.png'
 };
 
 var canvas = {
@@ -28,7 +27,7 @@ var canvas = {
 			dh = settings.heightSize;
 
     var tile = new Image();
-		tile.src = 'Tiles/red.png';
+		tile.src = settings.mainTile;
 
         for (var i = xMin; i <= xMax; i++) {
         	for (var j = yMin; j <= yMax; j++) {
@@ -82,6 +81,8 @@ var grid = (function() {
 		};
 	};
 	var update = function(coordinates) {
+		
+		canvas.clearArea(0, settings.width, 0, settings.height);
 		var ctx = settings.context;
 		var tile = new Image();
 

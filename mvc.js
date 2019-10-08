@@ -48,12 +48,11 @@ var Controller = {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       };
-      /*Движение
-      */
-      /*Model.coordinates.forEach(coord => {
-        coord.x = random(1, settings.width);
-        coord.y = random(1, settings.height);
-      });*/
+
+      Model.coordinates.forEach(coord => {
+        coord.x = random(0, settings.width);
+        coord.y = random(0, settings.height);
+      });
       Model.interactions = { 'rr': 0, 'yy': 0, 'ry': 0, 'yr': 0 };
 
       Model.coordinates.forEach(coord  => {
@@ -88,15 +87,15 @@ var Controller = {
       for (var i in Model.interactions) {
         if (i === 'rr' || i == 'ry') {
           for (var j = 0, l = Model.interactions[i]* Model.multiplicator[i]; j < l; j++) {
-            Model.coordinates.push({'x': random(1, settings.width),
-                                    'y': random(1, settings.height),
+            Model.coordinates.push({'x': random(0, settings.width),
+                                    'y': random(0, settings.height),
                                     't': 'r'});
           }
         }
         else if(i === 'yy' || i === 'yr') {
           for (var j = 0, l = Model.interactions[i]* Model.multiplicator[i]; j < l; j++) {
-            Model.coordinates.push({'x': random(1, settings.width),
-                                    'y': random(1, settings.height),
+            Model.coordinates.push({'x': random(0, settings.width),
+                                    'y': random(0, settings.height),
                                     't': 'y'});
           }
         }
